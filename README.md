@@ -1,6 +1,6 @@
 # ScrollMenu
 
-A jQuery plugin for adding cookie law banner and cookie blocking.
+A jQuery plugin for hide header on scroll down and show on scroll up.
 
 ## Including files
 
