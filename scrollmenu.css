@@ -1,0 +1,22 @@
+body {
+	margin: 0;
+	padding: 50px 0 0 0;
+}
+
+.navigation {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 50px;
+	transition: top .2s ease-in-out;
+	background: #333;
+	color: white;
+}
+
+.is-hidden {
+	top: -50px;
+}
+
+.is-visible {
+
+}
