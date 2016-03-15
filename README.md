@@ -77,12 +77,12 @@ $('.selector').scrollMenu({
 *Default*: `0`
 
 #### onScrollMenuDown:
-*Function*: Callback that fires on scroll Down.
+*Function*: Callback that fires on scroll down.
 
 *Default*: `function() {}`
 
 #### onScrollMenuUp:
-*Function*: Callback that fires on scroll Up.
+*Function*: Callback that fires on scroll up.
 
 *Default*: `function() {}`
 
@@ -90,9 +90,9 @@ $('.selector').scrollMenu({
 ## Event Hooks
 These event hooks fire at the same time as their corresponding callbacks (ie. onScrollMenuUp & onScrollMenuDown)
 
-`onScrollMenuUp` : This event is triggered on Mailchip success
+`onScrollMenuUp` : This event is triggered on scroll down
 
-`onScrollMenuDown` : This event is triggered on Mailchip errors
+`onScrollMenuDown` : This event is triggered on scroll up
 
 ##### Example:
 ```javascript
