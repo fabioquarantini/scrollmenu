@@ -56,11 +56,6 @@ $('.selector').scrollMenu({
 
 *Default*: `is-hidden`
 
-#### navigationHeight:
-*String*: Navigation height
-
-*Default*: `$(this).outerHeight()`
-
 #### timeOut:
 *Integer*: Delay scroll time out
 
@@ -74,7 +69,7 @@ $('.selector').scrollMenu({
 #### scrollOffset:
 *Integer*: Scroll offset
 
-*Default*: `0`
+*Default*: `$(this).outerHeight()`
 
 #### onScrollMenuDown:
 *Function*: Callback that fires on scroll down.

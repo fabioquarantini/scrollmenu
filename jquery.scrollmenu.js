@@ -1,4 +1,4 @@
-//! jQuery ScrollMenu v1.1.0 - Fabio Quarantini - www.fabioquarantini.com
+//! jQuery ScrollMenu v1.2.0 - Fabio Quarantini - www.fabioquarantini.com
 
 ;( function( $, window, document, undefined ) {
 
@@ -8,10 +8,9 @@
 			addClassTo: $(this),
 			scrollUpClass: 'is-visible',
 			scrollDownClass: 'is-hidden',
-			navigationHeight: $(this).outerHeight(),
 			timeOut: 1000/60,
 			delta: 5,
-			scrollOffset: 0,
+			scrollOffset: $(this).outerHeight(),
 			onScrollMenuDown: function() {},
 			onScrollMenuUp: function() {}
 		};
@@ -60,7 +59,7 @@
 			}
 
 			// If scroll is down and more than menu
-			if ( scrollTop > lastScrollTop && scrollTop > navigationHeight && scrollTop >= defaults.scrollOffset ) {
+			if ( scrollTop > lastScrollTop && scrollTop >= defaults.scrollOffset ) {
 
 				$(defaults.addClassTo).removeClass( defaults.scrollUpClass ).addClass( defaults.scrollDownClass );
 
@@ -73,7 +72,12 @@
 
 			} else {
 
-				if( scrollTop + windowHeight < documentHeight && scrollTop > navigationHeight ) {
+				if( scrollTop <= defaults.scrollOffset ) {
+
+					$(defaults.addClassTo).removeClass( defaults.scrollUpClass );
+				}
+
+				if( scrollTop + windowHeight < documentHeight && scrollTop >= defaults.scrollOffset ) {
 
 					$(defaults.addClassTo).removeClass( defaults.scrollDownClass ).addClass( defaults.scrollUpClass );
 
