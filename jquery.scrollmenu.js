@@ -1,4 +1,4 @@
-//! jQuery ScrollMenu v1.0.0 - Fabio Quarantini - www.fabioquarantini.com
+//! jQuery ScrollMenu v1.1.0 - Fabio Quarantini - www.fabioquarantini.com
 
 ;( function( $, window, document, undefined ) {
 
@@ -11,7 +11,9 @@
 			navigationHeight: $(this).outerHeight(),
 			timeOut: 1000/60,
 			delta: 5,
-			scrollOffset: 0
+			scrollOffset: 0,
+			onScrollMenuDown: function() {},
+			onScrollMenuUp: function() {}
 		};
 
 		var scrollTimeout;
@@ -62,12 +64,24 @@
 
 				$(defaults.addClassTo).removeClass( defaults.scrollUpClass ).addClass( defaults.scrollDownClass );
 
+				// Add event on scroll down
+				$(document).trigger('onScrollMenuDown');
+
+				// Run callback
+				defaults.onScrollMenuDown.call();
+
 
 			} else {
 
 				if( scrollTop + windowHeight < documentHeight && scrollTop > navigationHeight ) {
 
 					$(defaults.addClassTo).removeClass( defaults.scrollDownClass ).addClass( defaults.scrollUpClass );
+
+					// Add event on scroll up
+					$(document).trigger('onScrollMenuUp');
+
+					// Run callback
+					defaults.onScrollMenuUp.call();
 
 				}
 
