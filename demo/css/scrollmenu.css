@@ -1,6 +1,8 @@
 body {
 	margin: 0;
 	padding: 50px 0 0 0;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	color: #666;
 }
 
 .navigation {
@@ -19,4 +21,13 @@ body {
 
 .is-visible {
 	color:green;
+}
+
+.is-top {
+	color:red;
+}
+
+.is-bottom {
+	top:0;
+	color: yellow;
 }

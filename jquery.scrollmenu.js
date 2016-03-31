@@ -1,4 +1,4 @@
-//! jQuery ScrollMenu v1.2.0 - Fabio Quarantini - www.fabioquarantini.com
+//! jQuery ScrollMenu v1.3.0 - Fabio Quarantini - www.fabioquarantini.com
 
 ;( function( $, window, document, undefined ) {
 
@@ -8,17 +8,23 @@
 			addClassTo: $(this),
 			scrollUpClass: 'is-visible',
 			scrollDownClass: 'is-hidden',
+			scrollTopClass: 'is-top',
+			scrollBottomClass: 'is-bottom',
 			timeOut: 1000/60,
-			delta: 5,
+			tolleranceUp: 5,
+			tolleranceDown: 5,
 			scrollOffset: $(this).outerHeight(),
+			onScrollMenuUp: function() {},
 			onScrollMenuDown: function() {},
-			onScrollMenuUp: function() {}
+			onScrollMenuTop: function() {},
+			onScrollMenuBottom: function() {}
 		};
 
 		var scrollTimeout;
 		var lastScrollTop = 0;
 		var navigationHeight = defaults.navigationHeight;
-		var delta = defaults.delta;
+		var tolleranceUp = defaults.tolleranceUp;
+		var tolleranceDown = defaults.tolleranceDown;
 
 		$.extend( defaults, settings );
 
@@ -27,13 +33,13 @@
 
 			return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function ( callback ) {
 
-				window.setTimeout(callback, defaults.timeOut );
+				window.setTimeout( callback, defaults.timeOut );
 
 			};
 
 		})();
 
-		$(window).scroll( function () {
+		$( window ).scroll( function () {
 
 			if ( scrollTimeout ) {
 				// clear the timeout, if one is pending
@@ -47,47 +53,82 @@
 
 		var scrollHandler = function () {
 
-			var scrollTop = $( this ).scrollTop();
-			var windowHeight = $(window).height();
-			var documentHeight = $(document).height();
-
-			// If scroll is more than delta
-			if( Math.abs( lastScrollTop - scrollTop ) <= delta ) {
-
-        		return;
-
-			}
+			var scrollTop = $( window ).scrollTop();
+			var windowHeight = $( window ).height();
+			var documentHeight = $( document ).height();
 
 			// If scroll is down and more than menu
 			if ( scrollTop > lastScrollTop && scrollTop >= defaults.scrollOffset ) {
 
-				$(defaults.addClassTo).removeClass( defaults.scrollUpClass ).addClass( defaults.scrollDownClass );
+				// If scroll down is more than tollerance
+				if( Math.abs( lastScrollTop - scrollTop ) <= tolleranceDown ) {
 
-				// Add event on scroll down
-				$(document).trigger('onScrollMenuDown');
+					return;
 
-				// Run callback
-				defaults.onScrollMenuDown.call();
+				} else {
 
+					$( defaults.addClassTo ).removeClass( defaults.scrollUpClass ).addClass( defaults.scrollDownClass );
+
+					// Add event on scroll down
+					$( document ).trigger('onScrollMenuDown');
+
+					// Run callback
+					defaults.onScrollMenuDown.call();
+
+				}
 
 			} else {
 
-				if( scrollTop <= defaults.scrollOffset ) {
+				// If scroll up is more than tollerance
+				if( Math.abs( lastScrollTop - scrollTop ) <= tolleranceUp ) {
 
-					$(defaults.addClassTo).removeClass( defaults.scrollUpClass );
-				}
+					return;
 
-				if( scrollTop + windowHeight < documentHeight && scrollTop >= defaults.scrollOffset ) {
+				} else {
 
-					$(defaults.addClassTo).removeClass( defaults.scrollDownClass ).addClass( defaults.scrollUpClass );
+					$( defaults.addClassTo ).removeClass( defaults.scrollDownClass ).addClass( defaults.scrollUpClass );
 
 					// Add event on scroll up
-					$(document).trigger('onScrollMenuUp');
+					$( document ).trigger('onScrollMenuUp');
 
 					// Run callback
 					defaults.onScrollMenuUp.call();
 
 				}
+
+			}
+
+			// If scroll up reaches top
+			if( scrollTop == 0 ) {
+
+				$( defaults.addClassTo ).addClass( defaults.scrollTopClass );
+
+				// Add event on scroll reaches top
+				$( document ).trigger('onScrollMenuTop');
+
+				// Run callback
+				defaults.onScrollMenuTop.call();
+
+			} else {
+
+				$( defaults.addClassTo ).removeClass( defaults.scrollTopClass );
+
+			}
+
+			// If scroll up reaches bottom
+			if( scrollTop == ( documentHeight - windowHeight ) ) {
+
+				$( defaults.addClassTo ).addClass( defaults.scrollBottomClass );
+
+				// Add event on scroll reaches bottom
+				$( document ).trigger('onScrollMenuBottom');
+
+				// Run callback
+				defaults.onScrollMenuBottom.call();
+
+			} else {
+
+				$( defaults.addClassTo ).removeClass( defaults.scrollBottomClass );
 
 			}
 

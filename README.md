@@ -56,13 +56,28 @@ $('.selector').scrollMenu({
 
 *Default*: `is-hidden`
 
+#### scrollTopClass:
+*String*: Class added to the element when scroll reaches top
+
+*Default*: `is-top`
+
+#### scrollBottomClass:
+*String*: Class added to the element when scroll reaches bottom
+
+*Default*: `is-bottom`
+
 #### timeOut:
 *Integer*: Delay scroll time out
 
 *Default*: `1000/60`
 
-#### delta:
-*Integer*: Scroll delta
+#### tolleranceUp:
+*Integer*: Scroll up delta
+
+*Default*: `5`
+
+#### tolleranceDown:
+*Integer*: Scroll down delta
 
 *Default*: `5`
 
@@ -71,16 +86,25 @@ $('.selector').scrollMenu({
 
 *Default*: `$(this).outerHeight()`
 
-#### onScrollMenuDown:
-*Function*: Callback that fires on scroll down.
-
-*Default*: `function() {}`
-
 #### onScrollMenuUp:
-*Function*: Callback that fires on scroll up.
+*Function*: Callback that fires on scroll up
 
 *Default*: `function() {}`
 
+#### onScrollMenuDown:
+*Function*: Callback that fires on scroll down
+
+*Default*: `function() {}`
+
+#### onScrollMenuTop:
+*Function*: Callback that fires when scroll reaches top
+
+*Default*: `function() {}`
+
+#### onScrollMenuBottom:
+*Function*: Callback that fires when scroll reaches bottom
+
+*Default*: `function() {}`
 
 ## Event Hooks
 These event hooks fire at the same time as their corresponding callbacks (ie. onScrollMenuUp & onScrollMenuDown)
@@ -88,6 +112,10 @@ These event hooks fire at the same time as their corresponding callbacks (ie. on
 `onScrollMenuUp` : This event is triggered on scroll down
 
 `onScrollMenuDown` : This event is triggered on scroll up
+
+`onScrollMenuTop` : This event is triggered when scroll reaches top
+
+`onScrollMenuBottom` : This event is triggered when scroll reaches bottom
 
 ##### Example:
 ```javascript
