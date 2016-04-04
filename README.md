@@ -74,12 +74,12 @@ $('.selector').scrollMenu({
 #### tolleranceUp:
 *Integer*: Scroll up delta
 
-*Default*: `5`
+*Default*: `0`
 
 #### tolleranceDown:
 *Integer*: Scroll down delta
 
-*Default*: `5`
+*Default*: `0`
 
 #### scrollOffset:
 *Integer*: Scroll offset
@@ -106,6 +106,16 @@ $('.selector').scrollMenu({
 
 *Default*: `function() {}`
 
+#### onScrollMenuOffsetIn:
+*Function*: Callback that fires when scroll is in offset
+
+*Default*: `function() {}`
+
+#### onScrollMenuOffsetOut:
+*Function*: Callback that fires when scroll is out of offset
+
+*Default*: `function() {}`
+
 ## Event Hooks
 These event hooks fire at the same time as their corresponding callbacks (ie. onScrollMenuUp & onScrollMenuDown)
 
@@ -116,6 +126,10 @@ These event hooks fire at the same time as their corresponding callbacks (ie. on
 `onScrollMenuTop` : This event is triggered when scroll reaches top
 
 `onScrollMenuBottom` : This event is triggered when scroll reaches bottom
+
+`onScrollMenuOffsetIn` : This event is triggered when scroll is in offset
+
+`onScrollMenuOffsetOut` : This event is triggered when scroll is out of offset
 
 ##### Example:
 ```javascript

@@ -1,4 +1,4 @@
-//! jQuery ScrollMenu v1.3.0 - Fabio Quarantini - www.fabioquarantini.com
+//! jQuery ScrollMenu v1.4.0 - Fabio Quarantini - www.fabioquarantini.com
 
 ;( function( $, window, document, undefined ) {
 
@@ -10,14 +10,18 @@
 			scrollDownClass: 'is-hidden',
 			scrollTopClass: 'is-top',
 			scrollBottomClass: 'is-bottom',
+			scrollOffsetInClass: 'is-offset-in',
+			scrollOffsetOutClass: 'is-offset-out',
 			timeOut: 1000/60,
-			tolleranceUp: 5,
-			tolleranceDown: 5,
+			tolleranceUp: 0,
+			tolleranceDown: 0,
 			scrollOffset: $(this).outerHeight(),
 			onScrollMenuUp: function() {},
 			onScrollMenuDown: function() {},
 			onScrollMenuTop: function() {},
-			onScrollMenuBottom: function() {}
+			onScrollMenuBottom: function() {},
+			onScrollMenuOffsetIn: function() {},
+			onScrollMenuOffsetOut: function() {}
 		};
 
 		var scrollTimeout;
@@ -129,6 +133,29 @@
 			} else {
 
 				$( defaults.addClassTo ).removeClass( defaults.scrollBottomClass );
+
+			}
+
+			// If scroll is in scrollOffset
+			if( scrollTop <= defaults.scrollOffset ) {
+
+				$( defaults.addClassTo ).removeClass( defaults.scrollOffsetOutClass ).addClass( defaults.scrollOffsetInClass );
+
+				// Add event when scroll is in offset
+				$( document ).trigger('onScrollMenuOffsetIn');
+
+				// Run callback
+				defaults.onScrollMenuOffsetIn.call();
+
+			} else {
+
+				$( defaults.addClassTo ).removeClass( defaults.scrollOffsetInClass ).addClass( defaults.scrollOffsetOutClass );
+
+				// Add event when scroll is out of offset
+				$( document ).trigger('onScrollMenuOffsetOut');
+
+				// Run callback
+				defaults.onScrollMenuOffsetOut.call();
 
 			}
 
