@@ -1,4 +1,4 @@
-//! jQuery ScrollMenu v1.4.0 - Fabio Quarantini - www.fabioquarantini.com
+//! jQuery ScrollMenu v1.5.0 - Fabio Quarantini - www.fabioquarantini.com
 
 ;( function( $, window, document, undefined ) {
 
@@ -24,18 +24,19 @@
 			onScrollMenuOffsetOut: function() {}
 		};
 
-		var scrollTimeout;
+		//var
 		var lastScrollTop = 0;
 		var navigationHeight = defaults.navigationHeight;
 		var tolleranceUp = defaults.tolleranceUp;
 		var tolleranceDown = defaults.tolleranceDown;
+		var scrollTimeout;
 
 		$.extend( defaults, settings );
 
 		// Shim layer with setTimeout fallback
 		window.animationFrame = ( function ( callback ) {
 
-			return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function ( callback ) {
+			return window.requestAnimationFrame || function ( callback ) {
 
 				window.setTimeout( callback, defaults.timeOut );
 
@@ -48,12 +49,14 @@
 			if ( scrollTimeout ) {
 				// clear the timeout, if one is pending
 				clearTimeout( scrollTimeout );
-				scrollTimeout = null;
+				scrollTimeout = false;
+			} else {
+				scrollTimeout = true;
+				animationFrame( scrollHandler );
 			}
 
-			scrollTimeout = animationFrame( scrollHandler );
-
 		});
+
 
 		var scrollHandler = function () {
 
@@ -63,7 +66,6 @@
 
 			// If scroll is down and more than menu
 			if ( scrollTop > lastScrollTop && scrollTop >= defaults.scrollOffset ) {
-
 				// If scroll down is more than tollerance
 				if( Math.abs( lastScrollTop - scrollTop ) <= tolleranceDown ) {
 
@@ -82,7 +84,6 @@
 				}
 
 			} else {
-
 				// If scroll up is more than tollerance
 				if( Math.abs( lastScrollTop - scrollTop ) <= tolleranceUp ) {
 
@@ -159,11 +160,12 @@
 
 			}
 
+			scrollTimeout = false;
 			lastScrollTop = scrollTop;
 
 		};
 
+		scrollHandler();
 	};
-
 
 })( jQuery, window, document );
