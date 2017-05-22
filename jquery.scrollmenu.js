@@ -67,11 +67,7 @@
 			// If scroll is down and more than menu
 			if ( scrollTop > lastScrollTop && scrollTop >= defaults.scrollOffset ) {
 				// If scroll down is more than tollerance
-				if( Math.abs( lastScrollTop - scrollTop ) <= tolleranceDown ) {
-
-					return;
-
-				} else {
+				if( Math.abs( lastScrollTop - scrollTop ) >= tolleranceDown ) {
 
 					$( defaults.addClassTo ).removeClass( defaults.scrollUpClass ).addClass( defaults.scrollDownClass );
 
@@ -85,11 +81,7 @@
 
 			} else {
 				// If scroll up is more than tollerance
-				if( Math.abs( lastScrollTop - scrollTop ) <= tolleranceUp ) {
-
-					return;
-
-				} else {
+				if( Math.abs( lastScrollTop - scrollTop ) >= tolleranceUp ) {
 
 					$( defaults.addClassTo ).removeClass( defaults.scrollDownClass ).addClass( defaults.scrollUpClass );
 
