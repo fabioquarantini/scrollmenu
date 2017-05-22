@@ -66,6 +66,16 @@ $('.selector').scrollMenu({
 
 *Default*: `is-bottom`
 
+#### scrollOffsetInClass:
+*String*: Class added to the element when is in the offset
+
+*Default*: `is-offset-in`
+
+#### scrollOffsetOutClass:
+*String*: Class added to the element when is out of the offset
+
+*Default*: `is-offset-out`
+
 #### timeOut:
 *Integer*: Delay scroll time out
 
@@ -140,7 +150,7 @@ $( document ).on( 'onScrollMenuDown', function() {
 
 ## Credits
 
-Copyright (c) 2016 [Fabio Quarantini](http://www.fabioquarantini.com)
+Copyright (c) 2017 [Fabio Quarantini](http://www.fabioquarantini.com)
 
 ## License
 
